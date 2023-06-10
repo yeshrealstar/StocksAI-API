@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -16,7 +16,8 @@ def home():
 def about():
     return 'About'
 
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
+@cross_origin()
 def login():
     # takes user, password
     # returns {status}
