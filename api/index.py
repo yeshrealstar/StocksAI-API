@@ -1,12 +1,18 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 @app.route('/')
+@cross_origin()
 def home():
     return 'Hello, World!'
 
 @app.route('/about')
+@cross_origin()
 def about():
     return 'About'
 
@@ -48,6 +54,15 @@ def addtop3():
 
 @app.route('/changeTop3')
 def changetop3():
+    # takes user, top3
+    # returns {status }
+    res = {
+        "status": "Top3 changed successfully!"
+        }
+    return res
+
+@app.route('/getTop3')
+def gettop3():
     # takes user, top3
     # returns {status }
     res = {
