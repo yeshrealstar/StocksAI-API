@@ -5,6 +5,9 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+# libraries for bse
+from bsedata.bse import BSE
+b = BSE(update_codes = True)
 
 @app.route('/')
 @cross_origin()
@@ -84,8 +87,10 @@ def getdetails():
 def gettrending():
     # takes nothing
     # returns { trending stocks }
+    tg = b.topGainers()
+    trending = [[o['securityID'], b.verifyScripCode(o['scripCode'])] for o in tg[:3]]
     res = {
-        "trending": "trending stock information"
+        "trending": trending
         }
     return res
 
