@@ -7,6 +7,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # libraries for bse
 import bsedata
+from bsedata import bse
 
 @app.route('/')
 @cross_origin()
@@ -86,13 +87,12 @@ def getdetails():
 def gettrending():
     # takes nothing
     # returns { trending stocks }
-    b = bsedata.bse.BSE(update_codes = True)
+    b = bse.BSE(update_codes = True)
     tg = b.topGainers()
     trending = [[o['securityID'], b.verifyScripCode(o['scripCode'])] for o in tg[:3]]
     res = {
         "trending": trending
         }
     return res
-
 
 
