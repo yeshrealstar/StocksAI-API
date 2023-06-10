@@ -6,7 +6,7 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # libraries for bse
-from bsedata.bse import BSE
+# from bsedata.bse import BSE
 
 @app.route('/')
 @cross_origin()
